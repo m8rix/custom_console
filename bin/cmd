@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'bundler/inline'
+require "bundler/setup"
+require "robot"
+require 'tty-prompt'
+
+tty_prompt = TTY::Prompt.new(interrupt: :exit, active_color: :bright_black, prefix: 'robot >')
+
+command_handler = Robot::Command.new(grid_width: 5, grid_height: 5)
+
+console = Robot::Interface.new(tty_prompt, command_handler)
+
+console.input(tty_prompt.ask("")) while true
